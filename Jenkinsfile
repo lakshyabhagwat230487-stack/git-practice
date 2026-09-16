@@ -7,18 +7,17 @@ pipeline {
 
     stages {
 
-    stages {
         stage('Build') {
             steps {
                 echo 'building application'
             }
         }
 
-       stage('Test') {
-    steps {
-        sh 'test -f index.html'
-    }
-}
+        stage('Test') {
+            steps {
+                sh 'test -f index.html'
+            }
+        }
 
         stage('Docker Build') {
             steps {
