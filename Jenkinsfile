@@ -10,7 +10,7 @@ pipeline {
 
        stage('Test') {
     steps {
-        sh 'test -f index.html'
+        sh 'test -f ABC.html'
     }
 }
 
