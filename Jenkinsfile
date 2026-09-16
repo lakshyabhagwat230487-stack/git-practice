@@ -4,6 +4,12 @@ pipeline {
     parameters {
         string(name: 'APP_PORT', defaultValue: '8081', description: 'Port for application')
     }
+    string(
+        name: 'CONTAINER_NAME',
+        defaultValue: 'jenkins-demo-container',
+        description: 'change in container name'
+        )
+        
 
     stages {
 
@@ -29,7 +35,7 @@ pipeline {
             steps {
                 sh 'docker stop jenkins-demo-container || true'
                 sh 'docker rm jenkins-demo-container || true'
-                sh "docker run -d -p ${params.APP_PORT}:80 --name jenkins-demo-container jenkins-demo"
+                sh "docker run -d -p ${params.APP_PORT}:80 --name ${params.CONTAINER_NAME} jenkins-demo"
             }
         }
     }
