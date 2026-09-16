@@ -3,13 +3,13 @@ pipeline {
 
     parameters {
         string(name: 'APP_PORT', defaultValue: '8081', description: 'Port for application')
-    }
+    
     string(
         name: 'CONTAINER_NAME',
         defaultValue: 'jenkins-demo-container',
         description: 'change in container name'
         )
-        
+    }    
 
     stages {
 
