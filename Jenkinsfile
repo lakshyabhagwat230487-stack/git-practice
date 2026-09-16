@@ -1,6 +1,12 @@
 pipeline {
     agent any
 
+    parameters {
+        string(name: 'APP_PORT', defaultValue: '8081', description: 'Port for application')
+    }
+
+    stages {
+
     stages {
         stage('Build') {
             steps {
@@ -24,7 +30,7 @@ pipeline {
             steps {
                 sh 'docker stop jenkins-demo-container || true'
                 sh 'docker rm jenkins-demo-container || true'
-                sh 'docker run -d -p 8081:80 --name jenkins-demo-container jenkins-demo'
+                sh "docker run -d -p ${params.APP_PORT}:80 --name jenkins-demo-container jenkins-demo"
             }
         }
     }
