@@ -8,12 +8,11 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                sh 'echo running test'
-                sh 'test 5 -eq 5'
-            }
-        }
+       stage('Test') {
+    steps {
+        sh 'test -f index.html'
+    }
+}
 
         stage('Docker Build') {
             steps {
