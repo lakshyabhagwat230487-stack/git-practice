@@ -18,7 +18,13 @@ pipeline {
                 echo 'building application'
             }
         }
-
+      stage('Environemnt variable test'){
+          steps{
+               sh 'echo $BUILD_NUMBER'
+        sh 'echo $JOB_NAME'
+        sh 'echo $WORKSPACE'
+    }
+}
         stage('Test') {
             steps {
                 sh 'test -f index.html'
