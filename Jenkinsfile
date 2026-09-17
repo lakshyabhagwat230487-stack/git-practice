@@ -9,6 +9,11 @@ pipeline {
         defaultValue: 'jenkins-demo-container',
         description: 'change in container name'
         )
+        string(
+            name: 'DEPLOY',
+            defaultValue: 'no',
+            description: 'Decides whether the container to run'
+            )
     }    
 
     stages {
@@ -39,7 +44,12 @@ pipeline {
 
         stage('Deploy') {
             when {
+                allOff{
                 branch 'main'
+                expression {
+                    params.DEPLOY == 'yes'
+                }
+                }
             }
             steps {
                 sh 'docker stop jenkins-demo-container || true'
