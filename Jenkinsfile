@@ -38,6 +38,9 @@ pipeline {
         }
 
         stage('Deploy') {
+            when {
+                branch 'main'
+            }
             steps {
                 sh 'docker stop jenkins-demo-container || true'
                 sh 'docker rm jenkins-demo-container || true'
