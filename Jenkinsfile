@@ -44,7 +44,7 @@ pipeline {
 
         stage('Deploy') {
             when {
-                allOff{
+                allOf {
                 branch 'main'
                 expression {
                     params.DEPLOY == 'yes'
