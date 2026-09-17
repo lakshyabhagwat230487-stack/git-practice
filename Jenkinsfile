@@ -41,6 +41,11 @@ pipeline {
                 sh 'docker build -t jenkins-demo .'
             }
         }
+        stage ('Approval'){
+            steps{
+                input message: 'do u want to deploy?'
+            }
+        }
 
         stage('Deploy') {
             when {
@@ -57,5 +62,6 @@ pipeline {
                 sh "docker run -d -p ${params.APP_PORT}:80 --name ${params.CONTAINER_NAME} jenkins-demo"
             }
         }
+        
     }
 }
