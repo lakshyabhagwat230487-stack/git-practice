@@ -30,6 +30,19 @@ pipeline {
         sh 'echo $WORKSPACE'
     }
 }
+        stage('Docker Login') {
+    steps {
+        withCredentials([
+            usernamePassword(
+                credentialsId: 'dockerhub-creds',
+                usernameVariable: 'DOCKER_USER',
+                passwordVariable: 'DOCKER_PASS'
+            )
+        ]) {
+            sh 'docker login -u $DOCKER_USER -p $DOCKER_PASS'
+        }
+    }
+}
         stage('Test') {
             steps {
                 sh 'test -f index.html'
