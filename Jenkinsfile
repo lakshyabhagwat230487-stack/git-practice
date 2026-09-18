@@ -75,6 +75,12 @@ pipeline {
                 sh "docker run -d -p ${params.APP_PORT}:80 --name ${params.CONTAINER_NAME} jenkins-demo"
             }
         }
+        stage('Docker Push') {
+    steps {
+        sh 'docker tag jenkins-demo lasskaa/jenkins-demo'
+        sh 'docker push lasskaa/jenkins-demo'
+    }
+}
         
     }
 }
