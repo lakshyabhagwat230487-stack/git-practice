@@ -61,20 +61,21 @@ pipeline {
         }
 
         stage('Deploy') {
-            when {
-                allOf {
-                branch 'main'
-                expression {
-                    params.DEPLOY == 'yes'
-                }
-                }
-            }
-            steps {
-                sh 'docker stop jenkins-demo-container || true'
-                sh 'docker rm jenkins-demo-container || true'
-                sh "docker run -d -p ${params.APP_PORT}:80 --name ${params.CONTAINER_NAME} jenkins-demo"
+    when {
+        allOf {
+            branch 'main'
+            expression {
+                params.DEPLOY == 'yes'
             }
         }
+    }
+
+    steps {
+        sh "docker stop ${params.CONTAINER_NAME} || true"
+        sh "docker rm ${params.CONTAINER_NAME} || true"
+        sh "docker run -d -p ${params.APP_PORT}:80 --name ${params.CONTAINER_NAME} jenkins-demo"
+    }
+}
         stage('Docker Push') {
     steps {
         sh 'docker tag jenkins-demo lasskaa/jenkins-demo'
